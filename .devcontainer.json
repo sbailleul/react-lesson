@@ -14,7 +14,8 @@
 				"dbaeumer.vscode-eslint",
 				"esbenp.prettier-vscode",
 				"Zignd.html-css-class-completion",
-				"vitest.explorer"
+				"vitest.explorer",
+				"YoavBls.pretty-ts-errors"
 			]
 		}
 	}
