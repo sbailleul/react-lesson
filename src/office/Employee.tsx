@@ -20,6 +20,7 @@ export type EmployeeProps = {
   lastName: string;
   img: string;
   position: EmployeePosition;
+  onDismiss: () => void;
 };
 
 // Composant Employee décrit l'affichage d'un employé
@@ -28,6 +29,7 @@ export function Employee({
   lastName,
   img,
   position,
+  onDismiss,
 }: EmployeeProps) {
   const fullName = `${firstName} ${lastName}`;
   const positionDescription = getPositionDescription(position);
@@ -43,19 +45,27 @@ export function Employee({
         <CardTitle>{fullName}</CardTitle>
         {/* Rendu conditionnel de la description du poste de l'employé via la notation (valeur && <tag>Ce qui est rendu si la condition est vrai</tag>) */}
         {positionDescription && <CardText>{positionDescription}</CardText>}
-        {/* On peut réagir à l'évènement de click sur le bouton en passant une fonction nommée event handler dans notre cas handleSayHelloClick */}
-        <Button
-          variant="success"
-          className="w-100 mt-auto"
-          onClick={handleSayHelloClick}
-        >
-          Talk
-        </Button>
-        {/*
+        <div className="d-flex mt-auto">
+          {/* On peut réagir à l'évènement de click sur le bouton en passant une fonction nommée event handler dans notre cas handleSayHelloClick */}
+          {/*
           L'event handler peut être une fonction inline
          <Button variant="success" className="w-100 mt-auto" onClick={() => alert("Hello")}>Talk</Button> 
          <Button variant="success" className="w-100 mt-auto" onClick={function(){alert("Hello")}}>Talk</Button> 
          */}
+          <Button
+            variant="success"
+            className="flex-grow-1"
+            onClick={handleSayHelloClick}
+          >
+            Talk
+          </Button>
+          {
+            // On affiche le bouton de licenciement uniquement si l'employé n'est pas le directeur régional
+            position !== 'RegionalManager' && <Button variant="danger" className="w-50" onClick={onDismiss}>
+              Dismiss
+            </Button>
+          }
+        </div>
       </CardBody>
     </Card>
   );
