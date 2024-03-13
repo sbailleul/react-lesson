@@ -1,34 +1,46 @@
-import { useState } from 'react'
-import reactLogo from '@/assets/react.svg'
-import viteLogo from '/vite.svg'
-import '@/App.scss'
+import "@/App.scss";
+import dwight_schrute from "@/assets/employees/dwight_schrute.jpg";
+import jim_halper from "@/assets/employees/jim_halper.png";
+import michael_scott from "@/assets/employees/michael_scott.jpg";
+import pam_beesly from "@/assets/employees/pam_beesly.jpg";
+import { Employees, IdentifiedEmployee } from "@/office/Employees";
+
+// On initialise la liste des employés en dehors du composant pour éviter de récréer cette variable à chaque fois que le composant App est rendu
+const employees: IdentifiedEmployee[] = [
+  {
+    id: "uniq_1",
+    firstName: "Michael",
+    lastName: "Scott",
+    position: "RegionalManager",
+    img: michael_scott,
+  },
+  {
+    id: "uniq_2",
+    firstName: "Pam",
+    lastName: "Beesly",
+    position: "Receptionist",
+    img: pam_beesly,
+  },
+  {
+    id: "uniq_3",
+    firstName: "Dwight",
+    lastName: "Schrute",
+    position: "AssistantToTheRegionalManager",
+    img: dwight_schrute,
+  },
+  {
+    id: "uniq_4",
+    firstName: "Jim",
+    lastName: "Halper",
+    position: "SaleRepresentative",
+    img: jim_halper,
+  },
+];
 
 export function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='' >
-      <div>
-        <a href="https://vitejs.dev"  className='' target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className="d-flex">
+      <Employees employees={employees} />
     </div>
-  )
+  );
 }
-
