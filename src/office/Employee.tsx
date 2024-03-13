@@ -8,7 +8,7 @@ type EmployeePosition =
   | "SaleRepresentative";
 
 // Propriétés passées au composant React Employee
-type EmployeeProps = {
+export type EmployeeProps = {
   firstName: string;
   lastName: string;
   img: string;
