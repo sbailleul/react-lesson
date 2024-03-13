@@ -15,7 +15,11 @@
 				"esbenp.prettier-vscode",
 				"Zignd.html-css-class-completion",
 				"vitest.explorer",
-				"YoavBls.pretty-ts-errors"
+				"YoavBls.pretty-ts-errors",
+				"streetsidesoftware.code-spell-checker",
+				"sibiraj-s.vscode-scss-formatter",
+				"streetsidesoftware.code-spell-checker-french",
+				"mhutchie.git-graph"
 			]
 		}
 	}
