@@ -1,4 +1,10 @@
 import {
+  getPositionDescription,
+  isMemberOfManagement,
+  toFullName,
+} from "@/office/shared";
+import { Employee } from "@/office/shared";
+import {
   Button,
   Card,
   CardBody,
@@ -7,21 +13,10 @@ import {
   CardTitle,
 } from "react-bootstrap";
 
-// Représente les différents postes des employés du bureau
-type EmployeePosition =
-  | "RegionalManager"
-  | "AssistantToTheRegionalManager"
-  | "Receptionist"
-  | "SaleRepresentative";
-
 // Propriétés passées au composant React Employee
 export type EmployeeProps = {
-  firstName: string;
-  lastName: string;
-  img: string;
-  position: EmployeePosition;
   onDismiss: () => void;
-};
+} & Employee;
 
 // Composant Employee décrit l'affichage d'un employé
 export function Employee({
@@ -31,7 +26,7 @@ export function Employee({
   position,
   onDismiss,
 }: EmployeeProps) {
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = toFullName(firstName, lastName);
   const positionDescription = getPositionDescription(position);
   const handleSayHelloClick = () => alert("Hello");
   return (
@@ -61,27 +56,14 @@ export function Employee({
           </Button>
           {
             // On affiche le bouton de licenciement uniquement si l'employé n'est pas le directeur régional
-            position !== 'RegionalManager' && <Button variant="danger" className="w-50" onClick={onDismiss}>
-              Dismiss
-            </Button>
+            position !== "RegionalManager" && (
+              <Button variant="danger" className="w-50" onClick={onDismiss}>
+                Dismiss
+              </Button>
+            )
           }
         </div>
       </CardBody>
     </Card>
-  );
-}
-
-function getPositionDescription(position: EmployeePosition) {
-  switch (position) {
-    case "RegionalManager":
-      return "Spends his time: 80% distracting others; 19% procrastination; and 1% critical thinking";
-    case "AssistantToTheRegionalManager":
-      return "Attempting to elevate himself to second-in-command to branch manager";
-  }
-}
-function isMemberOfManagement(position: EmployeePosition) {
-  return (
-    position === "RegionalManager" ||
-    position === "AssistantToTheRegionalManager"
   );
 }
