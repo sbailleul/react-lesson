@@ -13,7 +13,7 @@ export function Employees(props: EmployeesProps) {
   // Etat local du composant, conserver entre chaque rendus
   const [employees, setEmployees] = useState(props.employees);
   return (
-    <div className="d-flex">
+    <div className="d-flex w-100">
       {employees.map((e) => (
         // Si on ne fournit pas de valeur à l'attribut key React va logger ce message dans la console : Warning: Each child in a list should have a unique "key" prop.
         // En effet React optimise les rendus des éléments dans un tableau, il ne rend que les éléments ayant changé,

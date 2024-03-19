@@ -7,7 +7,9 @@
   'GRAD' 0,
   'opsz' 24
 }
-
+.toto{
+  background-color: rgb(red, green, blue);
+}
 @for $i from 1 through 100 {
   .w-#{$i}{
     width: percentage($number: calc($i / 100))

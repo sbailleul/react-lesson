@@ -4,6 +4,7 @@ import jim_halper from "@/assets/employees/jim_halper.png";
 import michael_scott from "@/assets/employees/michael_scott.jpg";
 import pam_beesly from "@/assets/employees/pam_beesly.jpg";
 import { Employees, IdentifiedEmployee } from "@/office/Employees";
+import { ColorPicker } from "@/theme/ColorPicker";
 
 // On initialise la liste des employés en dehors du composant pour éviter de récréer cette variable à chaque fois que le composant App est rendu
 const employees: IdentifiedEmployee[] = [
@@ -39,8 +40,9 @@ const employees: IdentifiedEmployee[] = [
 
 export function App() {
   return (
-    <div className="d-flex">
+    <div className="d-flex flex-wrap">
       <Employees employees={employees} />
+      <ColorPicker />
     </div>
   );
 }
