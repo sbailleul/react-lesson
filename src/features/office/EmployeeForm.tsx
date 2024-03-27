@@ -3,8 +3,8 @@ import {
   EmployeePosition,
   getPositionDescription,
   toFullName,
-} from "@/office/shared";
-import { Employee } from "@/office/shared";
+} from "@/features/office/shared";
+import { Employee } from "@/features/office/shared";
 import { RequestStatus } from "@/shared/requests";
 import { delay } from "@/shared/time";
 import { useRef, useState } from "react";

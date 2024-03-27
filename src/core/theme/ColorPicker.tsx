@@ -1,7 +1,7 @@
 import {
   Color,
   mapColorToStyleBackground as mapColorToStyleBackground,
-} from "@/theme/shared";
+} from "@/core/theme/shared";
 import {
   Card,
   CardBody,

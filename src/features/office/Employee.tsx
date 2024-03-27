@@ -1,9 +1,9 @@
 import {
+  Employee,
   getPositionDescription,
   isMemberOfManagement,
   toFullName,
-} from "@/office/shared";
-import { Employee } from "@/office/shared";
+} from "@/features/office/shared";
 import {
   Button,
   Card,

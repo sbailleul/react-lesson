@@ -1,5 +1,5 @@
-import { Employee, EmployeeProps } from "@/office/Employee";
-import { EmployeeForm } from "@/office/EmployeeForm";
+import { Employee, EmployeeProps } from "@/features/office/Employee";
+import { EmployeeForm } from "@/features/office/EmployeeForm";
 import { useState } from "react";
 
 // Intersection du type EmployeeProps utilisé pour rendre un composant Employee avec le type {id: string} permettant d'identifier un employé avec un id unique
