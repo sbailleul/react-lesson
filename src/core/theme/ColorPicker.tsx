@@ -1,7 +1,5 @@
-import {
-  Color,
-  mapColorToStyleBackground as mapColorToStyleBackground,
-} from "@/core/theme/shared";
+import { Color, mapColorToStyleBackground } from "@/core/theme/shared";
+import { useState } from "react";
 import {
   Card,
   CardBody,
@@ -11,18 +9,32 @@ import {
   FormLabel,
 } from "react-bootstrap";
 
-type ColorProps = { color: Color; onColorChange: (color: Color) => void };
-export function ColorPicker({ color, onColorChange }: ColorProps) {
+type ColorProps = {
+  color: Color;
+  onColorChange: (color: Color) => void;
+  borderColor: "red" | "black";
+};
+export function ColorPicker({ color, onColorChange, borderColor }: ColorProps) {
+  const [changesCount, setChangesCount] = useState(0);
+  const handleColorChanged = (color: Color) => {
+    setChangesCount(changesCount + 1);
+    onColorChange(color);
+  };
   return (
-    <Card>
-      <CardTitle>Color picker</CardTitle>
+    <Card className="m-3" style={{ border: `5px solid ${borderColor}` }}>
+      <CardTitle className="d-flex justify-content-between">
+        Color picker
+        <div className="border border-3 rounded-2 border-success">
+          {changesCount}
+        </div>
+      </CardTitle>
       <CardBody>
         <FormGroup>
           <FormLabel>R</FormLabel>
           <FormControl
             type="number"
             onChange={(e) =>
-              onColorChange({ ...color, r: parseInt(e.target.value) })
+              handleColorChanged({ ...color, r: parseInt(e.target.value) })
             }
           />
         </FormGroup>
@@ -31,7 +43,7 @@ export function ColorPicker({ color, onColorChange }: ColorProps) {
           <FormControl
             type="number"
             onChange={(e) =>
-              onColorChange({ ...color, g: parseInt(e.target.value) })
+              handleColorChanged({ ...color, g: parseInt(e.target.value) })
             }
           />
         </FormGroup>
@@ -40,13 +52,13 @@ export function ColorPicker({ color, onColorChange }: ColorProps) {
           <FormControl
             type="number"
             onChange={(e) =>
-              onColorChange({ ...color, b: parseInt(e.target.value) })
+              handleColorChanged({ ...color, b: parseInt(e.target.value) })
             }
           />
         </FormGroup>
         <div>
           <h1>
-            Color :{" "}
+            Color
             <div
               style={{
                 ...mapColorToStyleBackground(color),
