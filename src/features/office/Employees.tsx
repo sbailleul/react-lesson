@@ -1,17 +1,17 @@
-import { Employee, EmployeeProps } from "@/features/office/Employee";
+import { Employee } from "@/features/office/Employee";
 import { EmployeeForm } from "@/features/office/EmployeeForm";
-import { useState } from "react";
-
-// Intersection du type EmployeeProps utilisé pour rendre un composant Employee avec le type {id: string} permettant d'identifier un employé avec un id unique
-export type IdentifiedEmployee = Omit<EmployeeProps, "onDismiss"> & {
-  id: string;
-};
+import {
+  employeesActions,
+  employeesReducer,
+} from "@/features/office/employees.reducer";
+import { IdentifiedEmployee } from "@/features/office/shared";
+import { useReducer } from "react";
 
 export type EmployeesProps = { employees: IdentifiedEmployee[] };
 
 export function Employees(props: EmployeesProps) {
   // Etat local du composant, conserver entre chaque rendus
-  const [employees, setEmployees] = useState(props.employees);
+  const [employees, dispatch] = useReducer(employeesReducer, props.employees);
   return (
     <>
       <div className="row overflow-x-auto flex-nowrap">
@@ -29,19 +29,14 @@ export function Employees(props: EmployeesProps) {
             img={e.img}
             position={e.position}
             // On recréer la liste des employées en excluant l'employé licencié
-            onDismiss={() =>
-              setEmployees(employees.filter((employee) => employee.id !== e.id))
-            }
+            onDismiss={() => dispatch(employeesActions.dismissEmployee(e))}
           />
         ))}
       </div>
       <EmployeeForm
         onCreate={(employee) =>
           // Rajoute un employé en créant un nouveau tableau et en ajoutant le nouvel employé à la fin
-          setEmployees([
-            ...employees,
-            { ...employee, id: `uniq_${employees.length}` },
-          ])
+          dispatch(employeesActions.hireEmployee(employee))
         }
       />
     </>

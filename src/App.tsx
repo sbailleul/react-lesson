@@ -5,7 +5,8 @@ import michael_scott from "@/assets/employees/michael_scott.jpg";
 import pam_beesly from "@/assets/employees/pam_beesly.jpg";
 import { Navbar } from "@/core/nav/Navbar";
 import { Theme } from "@/core/theme/Theme";
-import { Employees, IdentifiedEmployee } from "@/features/office/Employees";
+import { Employees } from "@/features/office/Employees";
+import { IdentifiedEmployee } from "@/features/office/shared";
 
 // On initialise la liste des employés en dehors du composant pour éviter de récréer cette variable à chaque fois que le composant App est rendu
 const employees: IdentifiedEmployee[] = [
