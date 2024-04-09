@@ -1,3 +1,4 @@
+import { useThemeContext } from "@/core/theme/useThemeContext";
 import { Color, mapColorToStyleBackground } from "@/core/theme/shared";
 import { useState } from "react";
 import {
@@ -10,15 +11,14 @@ import {
 } from "react-bootstrap";
 
 type ColorProps = {
-  color: Color;
-  onColorChange: (color: Color) => void;
   borderColor: "red" | "black";
 };
-export function ColorPicker({ color, onColorChange, borderColor }: ColorProps) {
+export function ColorPicker({ borderColor }: ColorProps) {
   const [changesCount, setChangesCount] = useState(0);
+  const { color, onColorChanged } = useThemeContext();
   const handleColorChanged = (color: Color) => {
     setChangesCount(changesCount + 1);
-    onColorChange(color);
+    onColorChanged(color);
   };
   return (
     <Card className="m-3" style={{ border: `5px solid ${borderColor}` }}>

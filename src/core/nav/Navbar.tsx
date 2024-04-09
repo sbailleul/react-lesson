@@ -31,7 +31,7 @@ function NavItem({
   onSelected: () => void;
 }) {
   return (
-    <a onClick={onSelected} className={`nav-item ${isActive ? "active" : ""}`}>
+    <a onClick={onSelected} className={`nav-link ${isActive ? "active" : ""}`}>
       {text}
     </a>
   );

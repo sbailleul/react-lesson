@@ -4,7 +4,8 @@ import jim_halper from "@/assets/employees/jim_halper.png";
 import michael_scott from "@/assets/employees/michael_scott.jpg";
 import pam_beesly from "@/assets/employees/pam_beesly.jpg";
 import { Navbar } from "@/core/nav/Navbar";
-import { Theme } from "@/core/theme/Theme";
+import { ColorPickerWrapper } from "@/core/theme/ColorPickerWrapper";
+import { ThemeProvider } from "@/core/theme/ThemeContext";
 import { Employees } from "@/features/office/Employees";
 import { IdentifiedEmployee } from "@/features/office/shared";
 
@@ -44,11 +45,12 @@ export function App() {
   return (
     <>
       <Navbar />
-      <Theme>
+      <ThemeProvider>
+        <ColorPickerWrapper />
         <div className="d-flex flex-wrap">
           <Employees employees={employees} />
         </div>
-      </Theme>
+      </ThemeProvider>
     </>
   );
 }
