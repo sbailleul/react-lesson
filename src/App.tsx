@@ -3,7 +3,11 @@ import dwight_schrute from "@/assets/employees/dwight_schrute.jpg";
 import jim_halper from "@/assets/employees/jim_halper.png";
 import michael_scott from "@/assets/employees/michael_scott.jpg";
 import pam_beesly from "@/assets/employees/pam_beesly.jpg";
-import { Employees, IdentifiedEmployee } from "@/office/Employees";
+import { Navbar } from "@/core/nav/Navbar";
+import { ColorPickerWrapper } from "@/core/theme/ColorPickerWrapper";
+import { ThemeProvider } from "@/core/theme/ThemeContext";
+import { Employees } from "@/features/office/Employees";
+import { IdentifiedEmployee } from "@/features/office/shared";
 
 // On initialise la liste des employés en dehors du composant pour éviter de récréer cette variable à chaque fois que le composant App est rendu
 const employees: IdentifiedEmployee[] = [
@@ -39,8 +43,14 @@ const employees: IdentifiedEmployee[] = [
 
 export function App() {
   return (
-    <div className="d-flex">
-      <Employees employees={employees} />
-    </div>
+    <>
+      <Navbar />
+      <ThemeProvider>
+        <ColorPickerWrapper />
+        <div className="d-flex flex-wrap">
+          <Employees employees={employees} />
+        </div>
+      </ThemeProvider>
+    </>
   );
 }

@@ -32,3 +32,8 @@ export function isMemberOfManagement(position: EmployeePosition) {
 export function toFullName(firstName: string, lastName: string) {
   return `${firstName} ${lastName}`;
 }
+// Intersection du type EmployeeProps utilisé pour rendre un composant Employee avec le type {id: string} permettant d'identifier un employé avec un id unique
+
+export type IdentifiedEmployee = Employee & {
+  id: string;
+};

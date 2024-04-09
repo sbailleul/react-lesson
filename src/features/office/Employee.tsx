@@ -1,9 +1,9 @@
 import {
+  Employee,
   getPositionDescription,
   isMemberOfManagement,
   toFullName,
-} from "@/office/shared";
-import { Employee } from "@/office/shared";
+} from "@/features/office/shared";
 import {
   Button,
   Card,
@@ -31,7 +31,7 @@ export function Employee({
   const handleSayHelloClick = () => alert("Hello");
   return (
     <Card
-      className={`w-20 ${
+      className={`col-2 ${
         isMemberOfManagement(position) ? "bg-info" : "bg-secondary"
       }`}
     >
