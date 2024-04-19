@@ -1,5 +1,5 @@
 import '@/App.scss'
-import { Todo } from '@/Todo'
+import { TodoList } from '@/TodoList'
 
 
 
@@ -7,7 +7,10 @@ export function App() {
 
   return (
     <div className='' >
-      <Todo title="title" description="description" status={true}/>
+      <TodoList todos={[
+        {description: 'description', title: 'title', status: true},
+        {description: 'description2', title: 'title2', status: false},
+      ]}/>
     </div>
   )
 }
