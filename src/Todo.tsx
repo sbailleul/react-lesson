@@ -8,6 +8,7 @@ type TodoProps = {
 };
 export function Todo({ title, description, status, onDelete }: TodoProps) {
   const [counter, setCounter] = useState(0);
+  
   return (
     <div>
       <h1>{title}</h1>
