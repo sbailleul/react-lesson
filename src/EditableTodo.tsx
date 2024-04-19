@@ -9,7 +9,7 @@ export function EditableTodo() {
     status: false,
   });
   return (
-    <div>
+    <div className="card bg-success">
       <input
         type="text"
         onChange={(e) => {

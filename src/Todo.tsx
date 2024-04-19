@@ -6,24 +6,33 @@ type TodoProps = {
   status: boolean;
   onDelete: () => void;
 };
+type Todo = { title: string; description: string; status: boolean };
+
 export function Todo({ title, description, status, onDelete }: TodoProps) {
-  const [counter, setCounter] = useState(0);
-  
+  const [todo, setTodo] = useState({ title, description, status });
   return (
     <div>
-      <h1>{title}</h1>
-      <h2>Count : {counter}</h2>
-      <p>{description}</p>
-      <button
-        onClick={() => {
-          setCounter(counter + 1);
-        }}
-      >
-        Increment
-      </button>
+      <h1>{todo.title}</h1>
+      <p>{todo.description}</p>
       <span>
-        <span>{status ? "Done" : "Todo"}</span>
+        <span>{todo.status ? "Done" : "Todo"}</span>
       </span>
+
+      <input
+        type="text"
+        value={todo.title}
+        onChange={(e) => setTodo({ ...todo, title: e.target.value })}
+      />
+      <input
+        type="text"
+        value={todo.description}
+        onChange={(e) => setTodo({ ...todo, description: e.target.value })}
+      />
+      <input
+        type="checkbox"
+        checked={todo.status}
+        onChange={() => setTodo({ ...todo, status: !todo.status })}
+      />
       <button onClick={onDelete} />
     </div>
   );
