@@ -11,8 +11,9 @@ function delay() {
 }
 type Todo = { id: string; title: string; description: string; status: boolean };
 
-type LoadingStatus = "idle" | "pending" | "success";
+type LoadingStatus = "idle" | "pending" | "success" | "error";
 export function TodoLists() {
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
   const [ownedTodos, setOwnedTodos] = useState<Todo[]>([
     {
       id: "t1",
@@ -27,7 +28,13 @@ export function TodoLists() {
   const handleSave = async () => {
     setLoadingStatus("pending");
     await delay();
-    setLoadingStatus("success");
+    if (isSuccess) {
+      setLoadingStatus("success");
+      setIsSuccess(false);
+    }else{
+      setLoadingStatus("error");
+      setIsSuccess(true);
+    }
   };
   return (
     <div>
@@ -35,6 +42,8 @@ export function TodoLists() {
       <button className="btn btn-success" onClick={handleSave}>
         Save
       </button>
+      {loadingStatus === "success" && <div className="alert alert-success">Success</div>}
+      {loadingStatus === "error" && <div className="alert alert-danger">Error</div>}
       <input
         className="form-control"
         placeholder="The todo title"
