@@ -2,25 +2,33 @@ import { EditableTodo } from "@/EditableTodo";
 import { Todo } from "@/Todo";
 import { useState } from "react";
 
-
-export type TodoListProps = { todos: Todo[] };
+export type TodoListProps = { todos?: Todo[] };
 
 function delay() {
   return new Promise((resolve) => {
     setTimeout(resolve, 3000);
   });
 }
-type Todo = {title: string, description: string, status: boolean}; 
+type Todo = { id: string; title: string; description: string; status: boolean };
 
-type LoadingStatus = 'idle' | 'pending' | 'success'
-export function TodoList({ todos }: TodoListProps) {
+type LoadingStatus = "idle" | "pending" | "success";
+export function TodoLists() {
+  const [ownedTodos, setOwnedTodos] = useState<Todo[]>([
+    {
+      id: "t1",
+      description: "test1",
+      title: "test1description",
+      status: false,
+    },
+    { id: "t2", description: "test2", title: "test2description", status: true },
+  ]);
   const [title, setTitle] = useState("Default title");
-  const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle');
+  const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>("idle");
   const handleSave = async () => {
-    setLoadingStatus('pending');
-    await delay()
-    setLoadingStatus('success')
-  }
+    setLoadingStatus("pending");
+    await delay();
+    setLoadingStatus("success");
+  };
   return (
     <div>
       <h1>{title}</h1>
@@ -34,16 +42,30 @@ export function TodoList({ todos }: TodoListProps) {
         type="text"
         onChange={(e) => setTitle(e.target.value)}
       />
-      {loadingStatus === 'pending' && <h3 className="bg-info">Pending todos : {todos.length} </h3>}
-      {loadingStatus === 'success' && <h3 className="bg-success">Saved todos : {todos.length} </h3>}
-      <EditableTodo/>
-      {todos.map((todo) => {
+      {loadingStatus === "pending" && (
+        <h3 className="bg-info">Pending todos : {ownedTodos.length} </h3>
+      )}
+      {loadingStatus === "success" && (
+        <h3 className="bg-success">Saved todos : {ownedTodos.length} </h3>
+      )}
+      <EditableTodo
+        onAdd={(todo) => {
+          setOwnedTodos([
+            ...ownedTodos,
+            { ...todo, id: `t${ownedTodos.length + 1}` },
+          ]);
+        }}
+      />
+      {ownedTodos.map((todo) => {
         return (
           <Todo
+            key={todo.id}
             title={todo.title}
             description={todo.description}
             status={todo.status}
-            onDelete={() => alert(`todo deleted ${todo.title}`)}
+            onDelete={() =>
+              setOwnedTodos(ownedTodos.filter((t) => t.id !== todo.id))
+            }
           />
         );
       })}
