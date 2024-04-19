@@ -5,7 +5,7 @@ export type TodoListProps = { todos: Todo[] };
 export function TodoList({ todos }: TodoListProps) {
   return <div>
     {todos.map(todo => {
-        return <Todo title={todo.title} description={todo.description} status={todo.status}/>
+        return <Todo title={todo.title} description={todo.description} status={todo.status} onDelete={() =>alert(`todo deleted ${todo.title}`) }/>
     })}
   </div>;
 }
