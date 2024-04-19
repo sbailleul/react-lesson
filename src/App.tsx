@@ -7,8 +7,8 @@ export function App() {
     <div className="">
       <TodoList
         todos={[
-          { description: "description", title: "title", status: true },
-          { description: "description2", title: "title2", status: false },
+          {id: 'test',  description: "description", title: "title", status: true },
+          {id: 'test2',  description: "description2", title: "title2", status: false },
         ]}
       />
       <EditableTodo />
