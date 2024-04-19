@@ -13,7 +13,7 @@ export function ColorPicker() {
           setColor({ ...color, r: parseInt(e.target.value) });
         }}
       />
-        <label htmlFor="r-color">G : </label>
+      <label htmlFor="r-color">G : </label>
       <input
         id="r-color"
         type="number"
@@ -21,7 +21,7 @@ export function ColorPicker() {
           setColor({ ...color, g: parseInt(e.target.value) });
         }}
       />
-        <label htmlFor="r-color">B : </label>
+      <label htmlFor="r-color">B : </label>
       <input
         id="r-color"
         type="number"
@@ -29,7 +29,13 @@ export function ColorPicker() {
           setColor({ ...color, b: parseInt(e.target.value) });
         }}
       />
-      {/* <span style={{}}></span> */}
+      <span
+        style={{
+          width: 30,
+          height: 30,
+          backgroundColor: `rgb(${color.r},${color.g},${color.b})`,
+        }}
+      ></span>
     </div>
   );
 }
