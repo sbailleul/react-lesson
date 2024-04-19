@@ -15,6 +15,7 @@ export function TodoList({ todos }: TodoListProps) {
           title={todo.title}
           description={todo.description}
           status={todo.status}
+          onDelete={() => {alert("Todo deleted")}}
         ></Todo>
       ))}
     </div>
