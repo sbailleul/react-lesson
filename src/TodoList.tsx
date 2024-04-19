@@ -1,7 +1,8 @@
+import { EditableTodo } from "@/EditableTodo";
 import { Todo } from "@/Todo";
 import { useState } from "react";
 
-type Todo = { title: string; description: string; status: boolean };
+
 export type TodoListProps = { todos: Todo[] };
 
 function delay() {
@@ -9,6 +10,8 @@ function delay() {
     setTimeout(resolve, 3000);
   });
 }
+type Todo = {title: string, description: string, status: boolean}; 
+
 type LoadingStatus = 'idle' | 'pending' | 'success'
 export function TodoList({ todos }: TodoListProps) {
   const [title, setTitle] = useState("Default title");
@@ -33,6 +36,7 @@ export function TodoList({ todos }: TodoListProps) {
       />
       {loadingStatus === 'pending' && <h3 className="bg-info">Pending todos : {todos.length} </h3>}
       {loadingStatus === 'success' && <h3 className="bg-success">Saved todos : {todos.length} </h3>}
+      <EditableTodo/>
       {todos.map((todo) => {
         return (
           <Todo
