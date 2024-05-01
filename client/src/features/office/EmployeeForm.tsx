@@ -25,15 +25,15 @@ import {
 
 type EmployeeFormProps = {
   onCreate: (employee: EmployeeData) => void;
+  createStatus: RequestStatus;
 };
 
 // Composant EmployeeForm permet de créer un nouvel employé
-export function EmployeeForm({ onCreate }: EmployeeFormProps) {
+export function EmployeeForm({ onCreate, createStatus }: EmployeeFormProps) {
   // Stockage de l'objet de type Partial<Employee>, Partial redéclare le type passé en générique pour rendre toutes ses propriétés optionnelles
   const [employee, setEmployee] = useState<Partial<EmployeeData>>({
     position: "RegionalManager",
   });
-  const [saveStatus, setSaveStatus] = useState<RequestStatus>("idle");
   const positionDescription =
     employee.position && getPositionDescription(employee.position);
   // Référence qui permet d’interagir avec le formulaire
@@ -54,7 +54,7 @@ export function EmployeeForm({ onCreate }: EmployeeFormProps) {
             toFullName(employee.firstName, employee.lastName)}
         </CardTitle>
         {positionDescription && <CardText>{positionDescription}</CardText>}
-        {saveStatus === "load" ? (
+        {createStatus === "load" ? (
           <Spinner />
         ) : (
           <Form ref={formRef} className="d-flex flex-column mt-auto">

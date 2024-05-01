@@ -5,30 +5,44 @@ import {
   getEmployees,
 } from "@/core/api/employees";
 import { EmployeeForm } from "@/features/office/EmployeeForm";
-import { employeesReducer } from "@/features/office/employees.reducer";
+import {
+  employeesActions,
+  employeesReducer,
+  initialEmployeesState,
+} from "@/features/office/employees.reducer";
 import { useEffect, useReducer } from "react";
 import { Employee } from "./Employee";
 
 export function Employees() {
   // Etat local du composant, conserver entre chaque rendus
-  const [employees, dispatch] = useReducer(employeesReducer, []);
+  const [state, dispatch] = useReducer(employeesReducer, initialEmployeesState);
   useEffect(() => {
-    getEmployees().then((employees) =>
-      dispatch({ type: "SET_EMPLOYEES", employees })
-    );
+    dispatch(employeesActions.getEmployeesRequested());
+    getEmployees()
+      .then((employees) =>
+        dispatch(employeesActions.getEmployeesSucceeded(employees))
+      )
+      .catch(() => dispatch(employeesActions.getEmployeesFailed()));
   }, []);
+
   const hireEmployee = (employee: EmployeeData) => {
-    createEmployee(employee).then((createdEmployee) =>
-      dispatch({ type: "HIRE_EMPLOYEE", employee: createdEmployee })
-    );
+    dispatch(employeesActions.hireEmployeeRequested());
+    createEmployee(employee)
+      .then((createdEmployee) =>
+        dispatch(employeesActions.hireEmployeeSucceeded(createdEmployee))
+      )
+      .catch(() => dispatch(employeesActions.hireEmployeeFailed()));
   };
   const dismissEmployee = (id: string) => {
-    deleteEmployee(id).then(() => dispatch({ type: "DISMISS_EMPLOYEE", id }));
+    dispatch(employeesActions.dismissEmployeeRequested());
+    deleteEmployee(id)
+      .then(() => dispatch(employeesActions.dismissEmployeeSucceeded(id)))
+      .catch(() => dispatch(employeesActions.dismissEmployeeFailed()));
   };
   return (
     <>
       <div className="row overflow-x-auto flex-nowrap">
-        {employees.map((e) => (
+        {state.employees.map((e) => (
           // Si on ne fournit pas de valeur à l'attribut key React va logger ce message dans la console : Warning: Each child in a list should have a unique "key" prop.
           // En effet React optimise les rendus des éléments dans un tableau, il ne rend que les éléments ayant changé,
           // pour ce faire il a besoin d'identifier quel élément est différent via l'attribut key.
@@ -46,7 +60,10 @@ export function Employees() {
           />
         ))}
       </div>
-      <EmployeeForm onCreate={hireEmployee} />
+      <EmployeeForm
+        onCreate={hireEmployee}
+        createStatus={state.statuses.hireEmployee}
+      />
     </>
   );
 }
