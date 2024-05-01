@@ -28,6 +28,7 @@ export function Employees(props: EmployeesProps) {
             lastName={e.lastName}
             img={e.img}
             position={e.position}
+            pokemonName={e.pokemonName}
             // On recréer la liste des employées en excluant l'employé licencié
             onDismiss={() => dispatch(employeesActions.dismissEmployee(e))}
           />

@@ -17,12 +17,14 @@ const employees: IdentifiedEmployee[] = [
     lastName: "Scott",
     position: "RegionalManager",
     img: michael_scott,
+    pokemonName: "pikachu",
   },
   {
     id: "uniq_2",
     firstName: "Pam",
     lastName: "Beesly",
     position: "Receptionist",
+    pokemonName: "bulbasaur",
     img: pam_beesly,
   },
   {
@@ -30,6 +32,7 @@ const employees: IdentifiedEmployee[] = [
     firstName: "Dwight",
     lastName: "Schrute",
     position: "AssistantToTheRegionalManager",
+    pokemonName: "ivysaur",
     img: dwight_schrute,
   },
   {
@@ -37,6 +40,7 @@ const employees: IdentifiedEmployee[] = [
     firstName: "Jim",
     lastName: "Halper",
     position: "SaleRepresentative",
+    pokemonName: "charmander",
     img: jim_halper,
   },
 ];

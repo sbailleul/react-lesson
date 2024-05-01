@@ -12,6 +12,7 @@ export type Employee = {
   lastName: string;
   img: string;
   position: EmployeePosition;
+  pokemonName: string;
 };
 
 export function getPositionDescription(position: EmployeePosition) {
