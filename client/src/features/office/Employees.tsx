@@ -1,11 +1,13 @@
-import { getEmployees } from "@/core/api/employees";
-import { Employee } from "@/features/office/Employee";
-import { EmployeeForm } from "@/features/office/EmployeeForm";
 import {
-  employeesActions,
-  employeesReducer,
-} from "@/features/office/employees.reducer";
+  EmployeeData,
+  createEmployee,
+  deleteEmployee,
+  getEmployees,
+} from "@/core/api/employees";
+import { EmployeeForm } from "@/features/office/EmployeeForm";
+import { employeesReducer } from "@/features/office/employees.reducer";
 import { useEffect, useReducer } from "react";
+import { Employee } from "./Employee";
 
 export function Employees() {
   // Etat local du composant, conserver entre chaque rendus
@@ -14,7 +16,15 @@ export function Employees() {
     getEmployees().then((employees) =>
       dispatch({ type: "SET_EMPLOYEES", employees })
     );
-  });
+  }, []);
+  const hireEmployee = (employee: EmployeeData) => {
+    createEmployee(employee).then((createdEmployee) =>
+      dispatch({ type: "HIRE_EMPLOYEE", employee: createdEmployee })
+    );
+  };
+  const dismissEmployee = (id: string) => {
+    deleteEmployee(id).then(() => dispatch({ type: "DISMISS_EMPLOYEE", id }));
+  };
   return (
     <>
       <div className="row overflow-x-auto flex-nowrap">
@@ -32,16 +42,11 @@ export function Employees() {
             img={e.img}
             position={e.position}
             // On recréer la liste des employées en excluant l'employé licencié
-            onDismiss={() => dispatch(employeesActions.dismissEmployee(e))}
+            onDismiss={() => dismissEmployee(e.id)}
           />
         ))}
       </div>
-      <EmployeeForm
-        onCreate={(employee) =>
-          // Rajoute un employé en créant un nouveau tableau et en ajoutant le nouvel employé à la fin
-          dispatch(employeesActions.hireEmployee(employee))
-        }
-      />
+      <EmployeeForm onCreate={hireEmployee} />
     </>
   );
 }

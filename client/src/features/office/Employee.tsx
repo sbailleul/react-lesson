@@ -1,4 +1,4 @@
-import type { Employee } from "@/core/api/employees";
+import type { EmployeeData } from "@/core/api/employees";
 import {
   getPositionDescription,
   isMemberOfManagement,
@@ -16,7 +16,7 @@ import {
 // Propriétés passées au composant React Employee
 export type EmployeeProps = {
   onDismiss: () => void;
-} & Employee;
+} & EmployeeData;
 
 // Composant Employee décrit l'affichage d'un employé
 export function Employee({

@@ -4,7 +4,7 @@ import {
   getPositionDescription,
   toFullName,
 } from "@/features/office/shared";
-import { Employee } from "@/core/api/employees";
+import { EmployeeData } from "@/core/api/employees";
 import { RequestStatus } from "@/shared/requests";
 import { delay } from "@/shared/time";
 import { useRef, useState } from "react";
@@ -24,13 +24,15 @@ import {
 } from "react-bootstrap";
 
 type EmployeeFormProps = {
-  onCreate: (employee: Employee) => void;
+  onCreate: (employee: EmployeeData) => void;
 };
 
 // Composant EmployeeForm permet de créer un nouvel employé
 export function EmployeeForm({ onCreate }: EmployeeFormProps) {
   // Stockage de l'objet de type Partial<Employee>, Partial redéclare le type passé en générique pour rendre toutes ses propriétés optionnelles
-  const [employee, setEmployee] = useState<Partial<Employee>>({});
+  const [employee, setEmployee] = useState<Partial<EmployeeData>>({
+    position: "RegionalManager",
+  });
   const [saveStatus, setSaveStatus] = useState<RequestStatus>("idle");
   const positionDescription =
     employee.position && getPositionDescription(employee.position);
@@ -42,11 +44,6 @@ export function EmployeeForm({ onCreate }: EmployeeFormProps) {
     setEmployee({});
   };
 
-  const simulateSaving = async (status: RequestStatus) => {
-    setSaveStatus("load");
-    await delay(3000);
-    setSaveStatus(status);
-  };
   return (
     <Card className={`w-20`}>
       <CardImg src={employee.img}></CardImg>
@@ -103,7 +100,9 @@ export function EmployeeForm({ onCreate }: EmployeeFormProps) {
                 }
               >
                 {EMPLOYEE_POSITIONS.map((position) => (
-                  <option value={position}>{position}</option>
+                  <option key={position} value={position}>
+                    {position}
+                  </option>
                 ))}
               </FormSelect>
             </FormGroup>
@@ -118,9 +117,8 @@ export function EmployeeForm({ onCreate }: EmployeeFormProps) {
               }
               className="w-100"
               onClick={async () => {
-                await simulateSaving("success");
                 handleReset();
-                onCreate(employee as Employee);
+                onCreate(employee as EmployeeData);
               }}
             >
               Create

@@ -28,16 +28,14 @@ export class EmployeesController {
   @Post()
   @ApiCreatedResponse()
   registerEmployees(@Body() employee: Employee) {
-    this.appService.registerEmployee(employee);
+    return this.appService.registerEmployee(employee);
   }
 
   @Get()
   @ApiOkResponse()
   @ApiNoContentResponse()
   async listEmployees() {
-    const result = await this.appService.listEmployees();
-    console.log(result);
-    return result;
+    return this.appService.listEmployees();
   }
 
   @Put()

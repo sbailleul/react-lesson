@@ -33,11 +33,12 @@ type Employees = Record<string, Employee>;
 const EMPLOYEES_FILE_NAME = join(__dirname, './assets/employees.json');
 @Injectable()
 export class EmployeesService {
-  async registerEmployee(employee: Employee) {
+  async registerEmployee(employee: Employee): Promise<IdentifiedEmployee> {
     const employees = await this.readEmployees();
     const id = v4();
-
+    console.log(employee);
     this.writeEmployees({ ...employees, [id]: employee });
+    return { ...employee, id };
   }
   async listEmployees(): Promise<IdentifiedEmployees> {
     const txt = await readFile(EMPLOYEES_FILE_NAME, 'utf-8');

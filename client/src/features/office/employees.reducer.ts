@@ -1,16 +1,16 @@
-import { Employee, IdentifiedEmployee } from "@/core/api/employees";
+import { EmployeeData, IdentifiedEmployeeData } from "@/core/api/employees";
 import { PropertiesReturnTypes } from "@/shared/types";
 
 export const employeesActions = {
-  hireEmployee: (employee: Employee) => ({
+  hireEmployee: (employee: IdentifiedEmployeeData) => ({
     type: "HIRE_EMPLOYEE" as const,
     employee,
   }),
-  dismissEmployee: (employee: IdentifiedEmployee) => ({
+  dismissEmployee: (id: string) => ({
     type: "DISMISS_EMPLOYEE" as const,
-    employee,
+    id,
   }),
-  setEmployees: (employees: IdentifiedEmployee[]) => ({
+  setEmployees: (employees: IdentifiedEmployeeData[]) => ({
     type: "SET_EMPLOYEES" as const,
     employees,
   }),
@@ -18,18 +18,15 @@ export const employeesActions = {
 type EmployeesActions = PropertiesReturnTypes<typeof employeesActions>;
 
 export function employeesReducer(
-  employees: IdentifiedEmployee[],
+  employees: IdentifiedEmployeeData[],
   action: EmployeesActions
 ) {
   switch (action.type) {
     case "SET_EMPLOYEES":
-      return employees;
+      return action.employees;
     case "DISMISS_EMPLOYEE":
-      return employees.filter((employee) => employee.id !== action.employee.id);
+      return employees.filter((employee) => employee.id !== action.id);
     case "HIRE_EMPLOYEE":
-      return [
-        ...employees,
-        { ...action.employee, id: `uniq_${employees.length + 1}` },
-      ];
+      return [...employees, action.employee];
   }
 }
