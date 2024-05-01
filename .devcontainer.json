@@ -7,7 +7,7 @@
 		"--name",
 		"react-lesson"
 	],
-	"postCreateCommand": "npm i -g pnpm",
+	"postAttachCommand": "npm i -g pnpm &&  npm i -g @nestjs/cli",
 	"customizations": {
 		"vscode": {
 			"extensions": [

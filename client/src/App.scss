@@ -1,10 +1,6 @@
 
 
-@for $i from 1 through 100{
-  .w-#{$i}{
-    width: percentage($i/100);
-  }
-}
+
 .logo {
   height: 6em;
   padding: 1.5em;
