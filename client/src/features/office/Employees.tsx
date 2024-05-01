@@ -1,17 +1,20 @@
+import { getEmployees } from "@/core/api/employees";
 import { Employee } from "@/features/office/Employee";
 import { EmployeeForm } from "@/features/office/EmployeeForm";
 import {
   employeesActions,
   employeesReducer,
 } from "@/features/office/employees.reducer";
-import { IdentifiedEmployee } from "@/features/office/shared";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
-export type EmployeesProps = { employees: IdentifiedEmployee[] };
-
-export function Employees(props: EmployeesProps) {
+export function Employees() {
   // Etat local du composant, conserver entre chaque rendus
-  const [employees, dispatch] = useReducer(employeesReducer, props.employees);
+  const [employees, dispatch] = useReducer(employeesReducer, []);
+  useEffect(() => {
+    getEmployees().then((employees) =>
+      dispatch({ type: "SET_EMPLOYEES", employees })
+    );
+  });
   return (
     <>
       <div className="row overflow-x-auto flex-nowrap">
@@ -28,7 +31,6 @@ export function Employees(props: EmployeesProps) {
             lastName={e.lastName}
             img={e.img}
             position={e.position}
-            pokemonName={e.pokemonName}
             // On recréer la liste des employées en excluant l'employé licencié
             onDismiss={() => dispatch(employeesActions.dismissEmployee(e))}
           />

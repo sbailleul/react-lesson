@@ -4,7 +4,7 @@ import {
   getPositionDescription,
   toFullName,
 } from "@/features/office/shared";
-import { Employee } from "@/features/office/shared";
+import { Employee } from "@/core/api/employees";
 import { RequestStatus } from "@/shared/requests";
 import { delay } from "@/shared/time";
 import { useRef, useState } from "react";

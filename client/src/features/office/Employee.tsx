@@ -1,11 +1,9 @@
-import { Pokemon } from "@/features/office/Pokemon";
+import type { Employee } from "@/core/api/employees";
 import {
   getPositionDescription,
   isMemberOfManagement,
   toFullName,
 } from "@/features/office/shared";
-import type { Employee } from "@/features/office/shared";
-import { useState } from "react";
 import {
   Button,
   Card,
@@ -27,10 +25,8 @@ export function Employee({
   img,
   position,
   onDismiss,
-  pokemonName,
 }: EmployeeProps) {
   const fullName = toFullName(firstName, lastName);
-  const [show, setShow] = useState(false);
   const positionDescription = getPositionDescription(position);
   const handleSayHelloClick = () => alert("Hello");
 
@@ -68,18 +64,9 @@ export function Employee({
                 </Button>
               )
             }
-
-            <Button
-              variant="warning"
-              className="w-50"
-              onClick={() => setShow(true)}
-            >
-              Pokemon
-            </Button>
           </div>
         </CardBody>
       </Card>
-      <Pokemon show={show} onHide={() => setShow(false)} name={pokemonName} />
     </>
   );
 }

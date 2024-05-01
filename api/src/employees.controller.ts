@@ -34,8 +34,10 @@ export class EmployeesController {
   @Get()
   @ApiOkResponse()
   @ApiNoContentResponse()
-  listEmployees() {
-    return this.appService.listEmployees();
+  async listEmployees() {
+    const result = await this.appService.listEmployees();
+    console.log(result);
+    return result;
   }
 
   @Put()

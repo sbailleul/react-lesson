@@ -1,4 +1,4 @@
-import { Employee, IdentifiedEmployee } from "@/features/office/shared";
+import { Employee, IdentifiedEmployee } from "@/core/api/employees";
 import { PropertiesReturnTypes } from "@/shared/types";
 
 export const employeesActions = {
@@ -10,6 +10,10 @@ export const employeesActions = {
     type: "DISMISS_EMPLOYEE" as const,
     employee,
   }),
+  setEmployees: (employees: IdentifiedEmployee[]) => ({
+    type: "SET_EMPLOYEES" as const,
+    employees,
+  }),
 } as const;
 type EmployeesActions = PropertiesReturnTypes<typeof employeesActions>;
 
@@ -18,6 +22,8 @@ export function employeesReducer(
   action: EmployeesActions
 ) {
   switch (action.type) {
+    case "SET_EMPLOYEES":
+      return employees;
     case "DISMISS_EMPLOYEE":
       return employees.filter((employee) => employee.id !== action.employee.id);
     case "HIRE_EMPLOYEE":

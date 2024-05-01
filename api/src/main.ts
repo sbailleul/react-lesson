@@ -2,7 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { EmployeesModule } from './employees.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
-  const app = await NestFactory.create(EmployeesModule);
+  const app = await NestFactory.create(EmployeesModule, {
+    cors: { origin: 'http://localhost:5173' },
+  });
   app.setGlobalPrefix('api/v1');
   const config = new DocumentBuilder()
     .setTitle('Employees')
