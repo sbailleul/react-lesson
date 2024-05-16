@@ -8,6 +8,8 @@ export function EditableTodo() {
     description: "",
     status: false,
   });
+  const canSaveTodo = !!todo.description && !!todo.title;
+
   return (
     <div className="card bg-success">
       <input
@@ -28,6 +30,12 @@ export function EditableTodo() {
           setTodo({ ...todo, status: !todo.status });
         }}
       />
+      <button
+        className="btn"
+        disabled={!canSaveTodo}
+      >
+        Save
+      </button>
     </div>
   );
 }
