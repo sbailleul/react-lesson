@@ -1,8 +1,10 @@
-import { useState } from "react";
 
-type Color = { r: number; g: number; b: number };
-export function ColorPicker() {
-  const [color, setColor] = useState<Color>({ r: 0, g: 0, b: 0 });
+export type Color = { r: number; g: number; b: number };
+interface ColorProps{
+  color: Color;
+  onColorChanged: (color: Color ) => void
+}
+export function ColorPicker({color, onColorChanged}: ColorProps) {
   return (
     <div className="card">
       <label htmlFor="r-color">R : </label>
@@ -10,7 +12,7 @@ export function ColorPicker() {
         id="r-color"
         type="number"
         onChange={(e) => {
-          setColor({ ...color, r: parseInt(e.target.value) });
+          onColorChanged({ ...color, r: parseInt(e.target.value) });
         }}
       />
       <label htmlFor="r-color">G : </label>
@@ -18,7 +20,7 @@ export function ColorPicker() {
         id="r-color"
         type="number"
         onChange={(e) => {
-          setColor({ ...color, g: parseInt(e.target.value) });
+          onColorChanged({ ...color, g: parseInt(e.target.value) });
         }}
       />
       <label htmlFor="r-color">B : </label>
@@ -26,7 +28,7 @@ export function ColorPicker() {
         id="r-color"
         type="number"
         onChange={(e) => {
-          setColor({ ...color, b: parseInt(e.target.value) });
+          onColorChanged({ ...color, b: parseInt(e.target.value) });
         }}
       />
       <span
