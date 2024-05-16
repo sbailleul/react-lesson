@@ -1,17 +1,26 @@
+import { useState } from "react";
 
 export type Color = { r: number; g: number; b: number };
-interface ColorProps{
+interface ColorProps {
   color: Color;
-  onColorChanged: (color: Color ) => void
+  onColorChanged: (color: Color) => void;
+  borderColor: "black" | "red";
 }
-export function ColorPicker({color, onColorChanged}: ColorProps) {
+export function ColorPicker({
+  color,
+  onColorChanged,
+  borderColor,
+}: ColorProps) {
+  const [counter, setCounter] = useState(0);
   return (
-    <div className="card">
+    <div className="card" style={{ borderColor: borderColor }}>
+      <h1>{counter}</h1>
       <label htmlFor="r-color">R : </label>
       <input
         id="r-color"
         type="number"
         onChange={(e) => {
+          setCounter(counter + 1);
           onColorChanged({ ...color, r: parseInt(e.target.value) });
         }}
       />
@@ -20,6 +29,7 @@ export function ColorPicker({color, onColorChanged}: ColorProps) {
         id="r-color"
         type="number"
         onChange={(e) => {
+          setCounter(counter + 1);
           onColorChanged({ ...color, g: parseInt(e.target.value) });
         }}
       />
@@ -28,6 +38,7 @@ export function ColorPicker({color, onColorChanged}: ColorProps) {
         id="r-color"
         type="number"
         onChange={(e) => {
+          setCounter(counter + 1);
           onColorChanged({ ...color, b: parseInt(e.target.value) });
         }}
       />
