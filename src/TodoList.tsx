@@ -17,6 +17,7 @@ export type TodoListProps = { todos: Todo[] };
 export function TodoList({ todos }: TodoListProps) {
   const [title, setTitle] = useState<string>();
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>("idle");
+  const [todoList, setTodoList] = useState(todos);
   return (
     <div>
       <h1>{title}</h1>
@@ -29,12 +30,12 @@ export function TodoList({ todos }: TodoListProps) {
       >
         Save
       </button>
-      {loadingStatus === "pending" && <span>Pending : {todos.length}</span>}
-      {loadingStatus === "done" && <span>Done : {todos.length}</span>}
+      {loadingStatus === "pending" && <span>Pending : {todoList.length}</span>}
+      {loadingStatus === "done" && <span>Done : {todoList.length}</span>}
       {/* {loadingStatus === 'pending' ? (
-        <span>Pending : {todos.length}</span>
+        <span>Pending : {todoList.length}</span>
       ) : (
-        <span>Done : {todos.length}</span>
+        <span>Done : {todoList.length}</span>
       )} */}
       <input
         placeholder="Mon titre pas encore modifié"
@@ -43,15 +44,15 @@ export function TodoList({ todos }: TodoListProps) {
           setTitle(e.target.value);
         }}
       />
-      {todos.map((todo) => (
+      {todoList.map((todo) => (
         <Todo
           key={todo.id}
           title={todo.title}
           description={todo.description}
           status={todo.status}
           onDelete={() => {
-            alert("Todo deleted");
-          }}
+            setTodoList(todoList.filter(t => t.id !== todo.id))
+          } }
         ></Todo>
       ))}
     </div>
