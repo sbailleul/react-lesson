@@ -11,7 +11,6 @@ export function App() {
           {id: 'test2',  description: "description2", title: "title2", status: false },
         ]}
       />
-      <EditableTodo />
     </div>
   );
 }

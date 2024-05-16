@@ -2,7 +2,8 @@ import { useState } from "react";
 
 export type Todo = { title: string; description: string; status: boolean };
 
-export function EditableTodo() {
+type EditableTodoProps = {onSave: () => void}
+export function EditableTodo({onSave}: EditableTodoProps) {
   const [todo, setTodo] = useState<Todo>({
     title: "",
     description: "",
@@ -33,6 +34,7 @@ export function EditableTodo() {
       <button
         className="btn"
         disabled={!canSaveTodo}
+        onClick={onSave}
       >
         Save
       </button>

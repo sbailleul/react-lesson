@@ -1,3 +1,4 @@
+import { EditableTodo } from "@/EditableTodo";
 import { Todo } from "@/Todo";
 import { useState } from "react";
 
@@ -12,12 +13,13 @@ function delay(ms: number) {
     setTimeout(resolve, ms);
   });
 }
-type LoadingStatus = "idle" | "pending" | "done";
+type LoadingStatus = "idle" | "pending" | "done" | "failed";
 export type TodoListProps = { todos: Todo[] };
 export function TodoList({ todos }: TodoListProps) {
   const [title, setTitle] = useState<string>();
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>("idle");
   const [todoList, setTodoList] = useState(todos);
+  const [singleTodoSave, setSingleTodoSave] = useState<LoadingStatus>("idle");
   return (
     <div>
       <h1>{title}</h1>
@@ -51,10 +53,21 @@ export function TodoList({ todos }: TodoListProps) {
           description={todo.description}
           status={todo.status}
           onDelete={() => {
-            setTodoList(todoList.filter(t => t.id !== todo.id))
-          } }
+            setTodoList(todoList.filter((t) => t.id !== todo.id));
+          }}
         ></Todo>
       ))}
+      <EditableTodo
+        onSave={() => {
+          setSingleTodoSave(
+            singleTodoSave == "done" || singleTodoSave == "idle"
+              ? "failed"
+              : "done"
+          );
+        }}
+      />
+      {singleTodoSave  === 'failed' && <span className="alert alert-danger">an error occured</span>}
+      {singleTodoSave  === 'done' && <span className="alert  alert-success">succesfully saved</span>}
     </div>
   );
 }
