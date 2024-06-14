@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { ThemeContext } from "@/Theme";
+import { useContext, useState } from "react";
 
 export type Color = { r: number; g: number; b: number };
 interface ColorProps {
-  color: Color;
-  onColorChanged: (color: Color) => void;
   borderColor: "black" | "red";
 }
 export function ColorPicker({
-  color,
-  onColorChanged,
   borderColor,
 }: ColorProps) {
+  const {color, updateColor} = useContext(ThemeContext);
+  
   const [counter, setCounter] = useState(0);
   return (
     <div className="card" style={{ borderColor: borderColor }}>
@@ -21,7 +20,7 @@ export function ColorPicker({
         type="number"
         onChange={(e) => {
           setCounter(counter + 1);
-          onColorChanged({ ...color, r: parseInt(e.target.value) });
+          updateColor({ ...color, r: parseInt(e.target.value) });
         }}
       />
       <label htmlFor="r-color">G : </label>
@@ -30,7 +29,7 @@ export function ColorPicker({
         type="number"
         onChange={(e) => {
           setCounter(counter + 1);
-          onColorChanged({ ...color, g: parseInt(e.target.value) });
+          updateColor({ ...color, g: parseInt(e.target.value) });
         }}
       />
       <label htmlFor="r-color">B : </label>
@@ -39,7 +38,7 @@ export function ColorPicker({
         type="number"
         onChange={(e) => {
           setCounter(counter + 1);
-          onColorChanged({ ...color, b: parseInt(e.target.value) });
+          updateColor({ ...color, b: parseInt(e.target.value) });
         }}
       />
       <span

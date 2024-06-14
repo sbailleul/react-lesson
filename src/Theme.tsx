@@ -1,29 +1,18 @@
-import { ColorPicker } from "@/ColorPicker";
 import type { Color } from "@/ColorPicker";
-import { useState } from "react";
-export function Theme() {
-  const [color, setColor] = useState<Color>({ r: 0, g: 0, b: 0 });
-  const [isStylized, setIsStylized] = useState(true);
-  return (
-    <>
-      {isStylized === true && (
-        <ColorPicker
-          color={color}
-          onColorChanged={setColor}
-          borderColor="red"
-        />
-      )}
-      {isStylized === false && (
-        <ColorPicker
-          color={color}
-          onColorChanged={setColor}
-          borderColor="black"
-        />
-      )}
+import { ReactNode, createContext, useState } from "react";
+type ThemeContextType = {
+  color: Color;
+  updateColor: (color: Color) => void;
+};
+export const ThemeContext = createContext<ThemeContextType>(undefined!);
 
-      <button className="btn" onClick={() => setIsStylized(!isStylized)}>
-        Stylize
-      </button>
-    </>
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  7;
+  const [color, setColor] = useState<Color>({ r: 0, g: 0, b: 0 });
+
+  return (
+    <ThemeContext.Provider value={{ color: color, updateColor: setColor }}>
+      {children}
+    </ThemeContext.Provider>
   );
 }

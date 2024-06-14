@@ -1,12 +1,12 @@
 import "@/App.scss";
-import { Theme } from "@/Theme";
+import { ColorPicker } from "@/ColorPicker";
 import { TodoLists } from "@/TodoList";
 
 export function App() {
   return (
     <div className="">
-      <Theme/>
-      <TodoLists/>
+      <ColorPicker borderColor={"black"}></ColorPicker>
+      <TodoLists />
       {/* <Todo title="MaTodo" description="Test" status={true} ></Todo> */}
     </div>
   );
