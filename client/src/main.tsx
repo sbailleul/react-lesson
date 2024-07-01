@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Employees } from "./features/office/Employees";
 import { Account } from "./features/account/Account";
 import { getUserInfo } from "./features/account/api";
+import { Article } from "./features/articles/Article";
 
 
 const router = createBrowserRouter([
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     element: <App />,
     path: "/",
     children: [
+      { path: "articles/:id", element: <Article /> },
       { path: "employees", element: <Employees /> },
       { path: "account", element: <Account />, loader: getUserInfo },
     ],

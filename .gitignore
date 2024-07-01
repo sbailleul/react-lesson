@@ -3,3 +3,4 @@ client/dist
 .pnpm-store/
 api/node_modules
 api/dist
+node_modules
