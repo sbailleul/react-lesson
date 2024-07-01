@@ -1,12 +1,8 @@
-import { useState } from "react";
+import { ThemeContext } from "@/ThemeContext";
+import { useContext, useState } from "react";
 
-interface Color {
-  r: number;
-  g: number;
-  b: number;
-}
 export const ColorPicker = () => {
-  const [color, setColor] = useState<Color>({ r: 0, g: 0, b: 0 });
+  const {color, onColorChanged} = useContext(ThemeContext)
   return (
     <div className="card">
       <label htmlFor="r">R:</label>
@@ -14,20 +10,20 @@ export const ColorPicker = () => {
         id="r"
         type="number"
         onChange={(e) => {
-          setColor({ ...color, r: e.target.valueAsNumber });
+          onColorChanged({ ...color, r: e.target.valueAsNumber });
         }}
       />
       <label htmlFor="g">G:</label>
       <input
         id="g"
         type="number"
-        onChange={(e) => setColor({ ...color, g: e.target.valueAsNumber })}
+        onChange={(e) => onColorChanged({ ...color, g: e.target.valueAsNumber })}
       />
       <label htmlFor="b">B:</label>
       <input
         id="b"
         type="number"
-        onChange={(e) => setColor({ ...color, b: e.target.valueAsNumber })}
+        onChange={(e) => onColorChanged({ ...color, b: e.target.valueAsNumber })}
       />
       <span
         style={{
