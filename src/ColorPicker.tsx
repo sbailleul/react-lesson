@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/Theme";
+import { ThemeContext } from "@/ThemeProvider";
 import { useContext, useState } from "react";
 
 export type Color = { r: number; g: number; b: number };

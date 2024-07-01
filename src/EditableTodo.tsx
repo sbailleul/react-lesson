@@ -1,4 +1,5 @@
-import { useReducer, useState } from "react";
+import { ThemeContext } from "@/ThemeProvider";
+import { useContext, useReducer, useState } from "react";
 
 type Todo = { title: string; description: string; status: boolean };
 
@@ -36,8 +37,11 @@ export function EditableTodo({ onAdd }: EditableTodoProps) {
     description: "",
     status: false,
   });
+  const {color} = useContext(ThemeContext);
+
   return (
     <div className="card">
+      <h1>{color.r}{color.g}{color.b}</h1>
       <input
         className="form-control"
         type="text"
