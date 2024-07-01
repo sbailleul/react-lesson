@@ -52,7 +52,7 @@ export function Todo({ title, description, status, onDelete }: TodoProps) {
       {pokeStatus === "loading" && (
         <div className="alert alert-info">Pika is running</div>
       )}
-      <img src={pokemon} />
+      <img data-testid="poke-img" src={pokemon} />
       <h1>{todo.title}</h1>
       <p>{todo.description}</p>
       <span>

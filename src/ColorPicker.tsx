@@ -26,6 +26,7 @@ export const ColorPicker = () => {
         onChange={(e) => onColorChanged({ ...color, b: e.target.valueAsNumber })}
       />
       <span
+        data-testid="color-preview"
         style={{
           width: 30,
           height: 30,
