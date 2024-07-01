@@ -1,5 +1,5 @@
-import { EditableTodo } from "@/EditableTodo";
-import { Todo } from "@/Todo";
+import { EditableTodo } from "@/features/todos/EditableTodo";
+import { Todo } from "@/features/todos/Todo";
 import { useState } from "react";
 
 type Todo = {

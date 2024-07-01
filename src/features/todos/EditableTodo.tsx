@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 export type Todo = { title: string; description: string; status: boolean };
 type UpdateTitleAction = { type: "UPDATE_TITLE"; title: string };

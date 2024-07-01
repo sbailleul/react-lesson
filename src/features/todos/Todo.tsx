@@ -1,5 +1,4 @@
-import { ThemeContext } from "@/ThemeContext";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 type TodoProps = {
   title: string;

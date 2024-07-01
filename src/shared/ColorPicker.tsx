@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/ThemeContext";
+import { ThemeContext } from "@/core/theme/ThemeContext";
 import { useContext, useState } from "react";
 
 export const ColorPicker = () => {
