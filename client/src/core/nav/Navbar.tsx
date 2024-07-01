@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export function Navbar() {
   const [selectedNavItem, setSelectedNavItem] = useState<number>();
@@ -7,12 +8,14 @@ export function Navbar() {
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav">
           <NavItem
-            text="React"
+            route="account"
+            text="Account"
             onSelected={() => setSelectedNavItem(0)}
             isActive={selectedNavItem === 0}
           />
           <NavItem
-            text="Angular"
+            route="employees"
+            text="Employees"
             onSelected={() => setSelectedNavItem(1)}
             isActive={selectedNavItem === 1}
           />
@@ -25,14 +28,20 @@ function NavItem({
   isActive,
   text,
   onSelected,
+  route,
 }: {
   isActive: boolean;
   text: string;
   onSelected: () => void;
+  route: string;
 }) {
   return (
-    <a onClick={onSelected} className={`nav-link ${isActive ? "active" : ""}`}>
+    <NavLink
+      to={route}
+      onClick={onSelected}
+      className={`nav-link ${isActive ? "active" : ""}`}
+    >
       {text}
-    </a>
+    </NavLink>
   );
 }
