@@ -7,17 +7,26 @@ import { TestInput } from "@/TestInput";
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
 const server = setupServer(
-  http.get('https://pokeapi.co/api/v2/pokemon/pikachu', () => {
+  http.get("https://pokeapi.co/api/v2/pokemon/pikachu", () => {
     return HttpResponse.json({ sprites: { front_default: "pokeSrc" } });
   })
 );
 
 describe("App", () => {
+  afterEach(cleanup);
   beforeEach(() => server.listen());
   it("should change poke img", async () => {
-    render(<App/>)
-    const pokeImg = await screen.findAllByTestId('poke-img')
-    expect(pokeImg[0]).toHaveAttribute('src', 'pokeSrc')
+    render(<App />);
+    const pokeImg = await screen.findAllByTestId("poke-img");
+    expect(pokeImg[0]).toHaveAttribute("src", "pokeSrc");
+  });
+  it("should render color preview", async () => {
+    render(<App />);
+    const rInput = screen.getByLabelText<HTMLInputElement>("R:");
+    const user = userEvent.setup();
+    await user.type(rInput, "123");
+    const spanPreview = screen.getByTestId("color-preview");
+    expect(spanPreview).toHaveStyle("background-color: rgb(123, 0, 0)");
   });
 });
 
