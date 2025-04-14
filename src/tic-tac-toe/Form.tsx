@@ -33,7 +33,6 @@ export function Form({ title, fired }: Props) {
           <button
             onClick={() => {
               setNewStudentName("");
-              students.push();
               setStudents([{id: newStudentName, name: newStudentName}, ...students]);
             }}
           >
