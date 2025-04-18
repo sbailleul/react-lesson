@@ -1,11 +1,11 @@
 import "@/App.scss";
 import { Page } from "@/features/students-managment/Page";
-import { setupWorker } from 'msw/browser'
- 
-const worker = setupWorker()
+import { setupWorker } from "msw/browser";
+import { useState } from "react";
+
+const worker = setupWorker();
 // worker.start()
 // worker.use(...handlers)
-
 
 export function App() {
   return (
@@ -13,7 +13,9 @@ export function App() {
       {/* <BurnMyComputer/> */}
       {/* <TicTacToe /> */}
       {/* <Form login={user.login} onLoginChanged={(login) => setUser({ login })} /> */}
-      <Page/>
+      {/* {flag ?<span><Page flag={true} /></span>  : <div><Page flag={false} /></div>} */}
+
+      <Page flag/>
       {/* <Employees employees={employees} /> */}
     </div>
   );
