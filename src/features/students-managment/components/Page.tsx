@@ -1,7 +1,8 @@
 import { Form } from "@/features/students-managment/components/Form";
+import type { NewStudent } from "@/features/students-managment/components/StudentField";
 import { Students } from "@/features/students-managment/components/Students";
 import type { Student } from "@/features/students-managment/shared/types";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type RequestStatus = "idle" | "loading" | "success" | "error";
 type Props = { studentId?: string };
@@ -9,7 +10,9 @@ type Props = { studentId?: string };
 export function Page() {
   const [students, setStudents] = useState<Student[]>([]);
   const [status, setStatus] = useState<RequestStatus>("idle");
-  useEffect(() => {
+  const [createStatus, setCreateStatus] = useState<RequestStatus>("idle");
+  const [deleteStatus, setDeleteStatus] = useState<RequestStatus>("idle");
+  const fetchStudents = useCallback(() => {
     setStatus("loading");
     fetch("http://fake-api/api/v1/students")
       .then((response) => {
@@ -27,12 +30,51 @@ export function Page() {
         setStatus("error");
       });
   }, []);
+  useEffect(() => {
+    fetchStudents();
+  }, [fetchStudents]);
 
   const uppercasedStudents = useMemo(
     () => students.map((s) => ({ ...s, firstname: s.firstname.toUpperCase() })),
     [students]
   );
-
+  const addStudent = (student: NewStudent) => {
+    setCreateStatus("loading");
+    fetch("http://fake-api/api/v1/students", {
+      method: "POST",
+      body: JSON.stringify(student),
+    })
+      .then((response) => {
+        setCreateStatus("success");
+        response
+          .json()
+          .then((student) => {
+            setStudents([...students, student]);
+          })
+          .catch((e) => setCreateStatus("error"));
+      })
+      .catch((e) => {
+        setCreateStatus("error");
+      });
+  };
+  const deleteStudent = (studentId: string) => {
+    setDeleteStatus("loading");
+    fetch(`http://fake-api/api/v1/students/${studentId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        setDeleteStatus("success");
+        response
+          .json()
+          .then(() => {
+            fetchStudents();
+          })
+          .catch((e) => setDeleteStatus("error"));
+      })
+      .catch((e) => {
+        setDeleteStatus("error");
+      });
+  };
   return (
     <div className="flex flex-column">
       <h1>{students.length} étudiants</h1>
@@ -41,9 +83,9 @@ export function Page() {
       <Form
         title="Edition étudiants"
         fired={false}
-        onStudentReady={() => undefined}
+        onStudentReady={addStudent}
       />
-      <Students students={uppercasedStudents} onDelete={() => {}} />
+      <Students students={uppercasedStudents} onDelete={deleteStudent} />
     </div>
   );
 }
