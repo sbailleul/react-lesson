@@ -1,9 +1,6 @@
-export type StudentProps = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  studentClass: string;
-  onDelete: () => void;
+import type { Student as S } from "@/features/students-managment/shared/types";
+export type StudentProps = S & {
+  onDelete: (studentId: string) => void;
 };
 export function Student({
   id,
@@ -18,7 +15,11 @@ export function Student({
         <span>
           {firstname} - {lastname} / {studentClass}
         </span>
-        <button className="btn btn-danger" onClick={onDelete}>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => onDelete(id)}
+        >
           Delete
         </button>
       </div>

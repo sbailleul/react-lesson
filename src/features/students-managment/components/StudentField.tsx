@@ -1,18 +1,17 @@
-import type { StudentProps } from "@/features/students-managment/components/Student";
+import type { Student } from "@/features/students-managment/shared/types"; 
 import { useState } from "react";
 
-type Student = Omit<StudentProps, "id">;
+export type NewStudent = Omit<Student, "id">;
 
 type Props = {
-  onStudentReady: (student: Student) => void;
+  onStudentReady: (student: NewStudent) => void;
 };
 export function StudentField({ onStudentReady }: Props) {
-  const [student, setStudent] = useState<Student>({
+  const [student, setStudent] = useState<NewStudent>({
     firstname: "",
     lastname: "",
     studentClass: "",
   });
-
   return (
     <>
       <div>
@@ -44,6 +43,7 @@ export function StudentField({ onStudentReady }: Props) {
           defaultValue={student.studentClass}
         />
         <button
+          type="button"
           onClick={() => {
             setStudent({ firstname: "", lastname: "", studentClass: "" });
             onStudentReady(student);
