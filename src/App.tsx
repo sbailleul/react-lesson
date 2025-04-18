@@ -1,5 +1,10 @@
 import "@/App.scss";
 import { Page } from "@/features/students-managment/components/Page";
+import { useState } from "react";
+type Test = {
+  age: number;
+  firstname: string;
+};
 
 export function App() {
   return (
