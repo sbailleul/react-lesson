@@ -11,7 +11,7 @@ type Student = {
 
 const students = [
 	{
-		firstname: faker.person.firstName(),
+		firstname: 'Pikachu',
 		lastname: faker.person.lastName(),
 		id: faker.string.uuid(),
 		studentClass: "AL-1",
