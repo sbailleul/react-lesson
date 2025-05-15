@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/features/students-managment/context/ThemeContex
 import {
   createBrowserRouter,
   RouterProvider,
-  useParams,
 } from "react-router-dom";
+import { StudentDetailPage } from "@/features/students-managment/components/student-detail/Page";
 import { Page } from "@/features/students-managment/components/Page";
 
 async function enableMocking() {
@@ -21,10 +21,7 @@ async function enableMocking() {
   // once the Service Worker is up and ready to intercept requests.
   return worker.start();
 }
-const StudentDetailPage = () => {
-  const { studentId } = useParams();
-  return <>MON ETUDIANT {studentId}</>;
-};
+
 const routes = createBrowserRouter([
   {
     path: "/",
