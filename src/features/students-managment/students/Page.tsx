@@ -1,7 +1,7 @@
 import type { Student } from "@/features/students-managment/shared/types";
-import { StudentForm } from "@/features/students-managment/StudentForm";
-import { StudentList } from "@/features/students-managment/StudentList";
-import { ColorPicker } from "@/features/students-managment/ColorPicker";
+import { StudentForm } from "@/features/students-managment/students/StudentForm";
+import { StudentList } from "@/features/students-managment/students/StudentList";
+import { ColorPicker } from "@/shared/theme/ColorPicker";
 
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";

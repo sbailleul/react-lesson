@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/features/students-managment/ThemeContext";
+import { ThemeContext } from "@/shared/theme/ThemeContext";
 import { useContext } from "react";
 
 export function ColorPicker() {

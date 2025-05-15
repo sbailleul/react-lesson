@@ -1,26 +1,25 @@
 import { App } from "@/App";
-import { Page } from "@/features/students-managment/Page";
-import { ThemeProvider } from "@/features/students-managment/ThemeContext";
+import { Page as AccountPage } from "@/features/account/Page";
+import { Page as StudentDetailPage } from "@/features/students-managment/student-detail/Page";
+import { Page as StudentsPage } from "@/features/students-managment/students/Page";
 import "@/index.scss";
+import { ThemeProvider } from "@/shared/theme/ThemeContext";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-const StudentDetail = () => {
-  const {studentId} = useParams()
-  return <span>STUDENT</span>;
-};
 const router = createBrowserRouter([
   {
     element: <App />,
     path: "/",
     children: [
       {
-        element: <Page />,
+        element: <StudentsPage />,
         path: "students",
         children: [],
       },
-      { element: <StudentDetail />, path: "students/:studentId" }
+      { element: <StudentDetailPage />, path: "students/:studentId" },
+      { element: <AccountPage />, path: "account" },
     ],
   },
 ]);

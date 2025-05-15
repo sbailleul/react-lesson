@@ -1,11 +1,13 @@
 import "@/App.scss";
-import { ThemeProvider } from "@/features/students-managment/ThemeContext";
+import { Navbar } from "@/shared/Navbar";
+import { ThemeProvider } from "@/shared/theme/ThemeContext";
 import { Outlet } from "react-router-dom";
 
 export function App() {
   return (
     <ThemeProvider>
       <div className="d-flex">
+        <Navbar />
         {/* <BurnMyComputer/> */}
         {/* <TicTacToe /> */}
         {/* <Form login={user.login} onLoginChanged={(login) => setUser({ login })} /> */}
