@@ -1,7 +1,7 @@
 import "@/App.scss";
 import { Page } from "@/features/students-managment/Page";
 import { setupWorker } from "msw/browser";
-import { useState } from "react";
+import { ThemeProvider } from "@/features/students-managment/ThemeContext";
 
 const worker = setupWorker();
 // worker.start()
@@ -9,6 +9,7 @@ const worker = setupWorker();
 
 export function App() {
   return (
+  <ThemeProvider>
     <div className="d-flex">
       {/* <BurnMyComputer/> */}
       {/* <TicTacToe /> */}
@@ -18,5 +19,6 @@ export function App() {
       <Page flag/>
       {/* <Employees employees={employees} /> */}
     </div>
+  </ThemeProvider>
   );
 }

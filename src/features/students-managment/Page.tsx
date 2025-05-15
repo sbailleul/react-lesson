@@ -1,8 +1,9 @@
 import type { Student } from "@/features/students-managment/shared/types";
 import { StudentForm } from "@/features/students-managment/StudentForm";
 import { StudentList } from "@/features/students-managment/StudentList";
+import { ColorPicker } from "@/features/students-managment/ColorPicker";
+
 import { useEffect, useState } from "react";
-import { isElement } from "react-dom/test-utils";
 type Props = { flag: boolean };
 export function Page({ flag }: Props) {
   const [students, setStudents] = useState<Student[]>([]);
@@ -30,6 +31,7 @@ export function Page({ flag }: Props) {
 
   return (
     <div className="flex flex-column">
+        <ColorPicker />
       {status === "loading" && <span>Loading...</span>}
       {status === "error" && <span>Has error !</span>}
       <span>Flag {flag}</span>
