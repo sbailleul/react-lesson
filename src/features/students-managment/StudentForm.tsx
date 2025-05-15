@@ -1,6 +1,6 @@
 import type { Student } from "@/features/students-managment/shared/types";
 import { useState } from "react";
-type Props = { onStudentCreated: (student: Omit<Student, 'id'>) => void };
+type Props = { onStudentCreated: (student: Omit<Student, "id">) => void };
 export function StudentForm({ onStudentCreated }: Props) {
   const [firstname, setFirstname] = useState<string>();
   const [lastname, setLastname] = useState<string>();
@@ -24,6 +24,7 @@ export function StudentForm({ onStudentCreated }: Props) {
         }}
       />
       <button
+        type="button"
         disabled={!firstname || !lastname}
         onClick={(e) =>
           onStudentCreated({

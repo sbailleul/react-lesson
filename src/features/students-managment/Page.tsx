@@ -4,8 +4,8 @@ import { StudentList } from "@/features/students-managment/StudentList";
 import { ColorPicker } from "@/features/students-managment/ColorPicker";
 
 import { useEffect, useState } from "react";
-type Props = { flag: boolean };
-export function Page({ flag }: Props) {
+import { Outlet } from "react-router-dom";
+export function Page() {
   const [students, setStudents] = useState<Student[]>([]);
   const [status, setStatus] = useState("idle");
   useEffect(() => {
@@ -31,10 +31,10 @@ export function Page({ flag }: Props) {
 
   return (
     <div className="flex flex-column">
-        <ColorPicker />
+      <ColorPicker />
+      <Outlet/>
       {status === "loading" && <span>Loading...</span>}
       {status === "error" && <span>Has error !</span>}
-      <span>Flag {flag}</span>
       <StudentForm
         onStudentCreated={(s) => {
           fetch("http://fake-api/api/v1/students", {

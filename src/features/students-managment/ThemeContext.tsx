@@ -1,5 +1,4 @@
 import { createContext, useState, type ReactNode } from "react";
-
 type Theme  = {
     exaColor: string;
     onColorChange: (newColor: string) => void;

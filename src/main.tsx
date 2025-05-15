@@ -1,7 +1,29 @@
+import { App } from "@/App";
+import { Page } from "@/features/students-managment/Page";
+import { ThemeProvider } from "@/features/students-managment/ThemeContext";
+import "@/index.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "@/App";
-import "@/index.scss";
+import { createBrowserRouter, RouterProvider, useParams } from "react-router-dom";
+
+const StudentDetail = () => {
+  const {studentId} = useParams()
+  return <span>STUDENT</span>;
+};
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    path: "/",
+    children: [
+      {
+        element: <Page />,
+        path: "students",
+        children: [],
+      },
+      { element: <StudentDetail />, path: "students/:studentId" }
+    ],
+  },
+]);
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -20,7 +42,9 @@ enableMocking().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     // Contrôle et log les bugs durant la phase de développement
     <React.StrictMode>
-      <App />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </React.StrictMode>
   );
 });
