@@ -1,5 +1,6 @@
 import { ThemeContext } from "@/features/students-managment/context/ThemeContext";
 import { useContext } from "react";
+window.history.pushState({}, "ColorPicker", "/color-picker");
 
 export function ColorPicker() {
   const { exaColor, onColorChange } = useContext(ThemeContext);

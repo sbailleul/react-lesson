@@ -1,20 +1,19 @@
 import "@/App.scss";
-import { Page } from "@/features/students-managment/components/Page";
 import {
-  ThemeContext,
-  ThemeProvider,
+  ThemeProvider
 } from "@/features/students-managment/context/ThemeContext";
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 type Test = {
   age: number;
   firstname: string;
 };
 
+
 export function App() {
   return (
     <ThemeProvider>
       <div className="d-flex">
-        <Page />
+        <Outlet />
         {/* <Form title="AL1" fired={false}  /> */}
         {/* <TicTacToe/> */}
       </div>
