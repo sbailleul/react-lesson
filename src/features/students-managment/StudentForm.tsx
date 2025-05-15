@@ -1,6 +1,6 @@
 import type { Student } from "@/features/students-managment/shared/types";
 import { useState } from "react";
-type Props = { onStudentCreated: (student: Student) => void };
+type Props = { onStudentCreated: (student: Omit<Student, 'id'>) => void };
 export function StudentForm({ onStudentCreated }: Props) {
   const [firstname, setFirstname] = useState<string>();
   const [lastname, setLastname] = useState<string>();
@@ -29,7 +29,6 @@ export function StudentForm({ onStudentCreated }: Props) {
           onStudentCreated({
             firstname: firstname as string,
             lastname: lastname as string,
-            id: "abc",
           })
         }
       >

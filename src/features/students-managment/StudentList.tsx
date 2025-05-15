@@ -6,7 +6,7 @@ export function StudentList({ students, onDelete }: Props) {
     <div key={s.id} className="card flex ">
       <div>Prénom : {s.firstname}</div>
       <div>Nom : {s.lastname}</div>
-      <button onClick={() => onDelete(s.id)}>Delete</button>
+      <button type="button" onClick={() => onDelete(s.id)}>Delete</button>
     </div>
   ));
 }
