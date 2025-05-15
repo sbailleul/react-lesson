@@ -2,7 +2,7 @@ import { ThemeContext } from "@/features/students-managment/context/ThemeContext
 import { useContext } from "react";
 
 export function ColorPicker() {
-  const { b, g, onColorChange, r } = useContext(ThemeContext);
+  const { exaColor, onColorChange } = useContext(ThemeContext);
   return (
     <div className="flex flex-column">
       <label htmlFor="color-picker">Choose a color:</label>
@@ -10,7 +10,8 @@ export function ColorPicker() {
         type="color"
         id="color-picker"
         name="color-picker"
-        defaultValue="#000000"
+        defaultValue={exaColor}
+        onChange={(e) => onColorChange(e.target.value)}
       />
     </div>
   );

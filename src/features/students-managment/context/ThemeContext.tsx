@@ -1,27 +1,26 @@
 import { createContext, useState, type ReactNode } from "react";
 
 type Theme  = {
-    r: number;
-    g: number;
-    b: number;
-    onColorChange: (r: number, g: number, b: number) => void;
+    exaColor: string;
+    onColorChange: (newColor: string) => void;
 }
 
-export const ThemeContext =createContext<Theme>({r: 0, g: 0, b: 0, onColorChange: () => {}});
+export const defaultColor = "#F3F5F6";
 
-export const ThemeProvider = ({ children }: { children:ReactNode }) => {
-  const [r, setR] =useState(0);
-  const [g, setG] =useState(0);
-  const [b, setB] =useState(0);
+export const ThemeContext = createContext<Theme>({
+  exaColor: defaultColor,
+  onColorChange: () => {},
+});
 
-  const onColorChange = (r: number, g: number, b: number) => {
-    setR(r);
-    setG(g);
-    setB(b);
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [exaColor, setExaColor] = useState<string>(defaultColor);
+
+  const onColorChange = (newColor: string) => {
+    setExaColor(newColor);
   };
 
   return (
-    <ThemeContext.Provider value={{ r, g, b, onColorChange }}>
+    <ThemeContext.Provider value={{ exaColor, onColorChange }}>
       {children}
     </ThemeContext.Provider>
   );

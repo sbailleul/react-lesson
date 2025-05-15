@@ -1,3 +1,4 @@
+import { ColorPicker } from "@/features/students-managment/components/ColorPicker";
 import { Form } from "@/features/students-managment/components/Form";
 import type { NewStudent } from "@/features/students-managment/components/StudentField";
 import { Students } from "@/features/students-managment/components/Students";
@@ -5,13 +6,12 @@ import type { Student } from "@/features/students-managment/shared/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type RequestStatus = "idle" | "loading" | "success" | "error";
-type Props = { studentId?: string };
 
 export function Page() {
   const [students, setStudents] = useState<Student[]>([]);
   const [status, setStatus] = useState<RequestStatus>("idle");
-  const [createStatus, setCreateStatus] = useState<RequestStatus>("idle");
-  const [deleteStatus, setDeleteStatus] = useState<RequestStatus>("idle");
+  const [, setCreateStatus] = useState<RequestStatus>("idle");
+  const [, setDeleteStatus] = useState<RequestStatus>("idle");
   const fetchStudents = useCallback(() => {
     setStatus("loading");
     fetch("http://fake-api/api/v1/students")
@@ -51,9 +51,9 @@ export function Page() {
           .then((student) => {
             setStudents([...students, student]);
           })
-          .catch((e) => setCreateStatus("error"));
+          .catch(() => setCreateStatus("error"));
       })
-      .catch((e) => {
+      .catch(() => {
         setCreateStatus("error");
       });
   };
@@ -69,23 +69,24 @@ export function Page() {
           .then(() => {
             fetchStudents();
           })
-          .catch((e) => setDeleteStatus("error"));
+          .catch(() => setDeleteStatus("error"));
       })
-      .catch((e) => {
+      .catch(() => {
         setDeleteStatus("error");
       });
   };
   return (
-    <div className="flex flex-column">
-      <h1>{students.length} étudiants</h1>
-      {status === "loading" && <h2>Loading ...</h2>}
-      {status === "error" && <h2 className="alert alert-danger">Error !</h2>}
-      <Form
-        title="Edition étudiants"
-        fired={false}
-        onStudentReady={addStudent}
-      />
-      <Students students={uppercasedStudents} onDelete={deleteStudent} />
-    </div>
+      <div className="flex flex-column">
+        <h1>{students.length} étudiants</h1>
+        {status === "loading" && <h2>Loading ...</h2>}
+        {status === "error" && <h2 className="alert alert-danger">Error !</h2>}
+        <Form
+          title="Edition étudiants"
+          fired={false}
+          onStudentReady={addStudent}
+        />
+        <Students students={uppercasedStudents} onDelete={deleteStudent} />
+         <ColorPicker />
+      </div>
   );
 }
