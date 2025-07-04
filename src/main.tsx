@@ -6,8 +6,9 @@ import "@/index.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
+  createBrowserRouter,
   createHashRouter,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
 
 async function enableMocking() {
@@ -21,8 +22,7 @@ async function enableMocking() {
   // once the Service Worker is up and ready to intercept requests.
   return worker.start();
 }
-
-const routes = createHashRouter([
+const routesList = [
   {
     path: "/",
     element: <App />,
@@ -34,7 +34,12 @@ const routes = createHashRouter([
       { path: "students/:studentId", element: <StudentDetailPage /> },
     ],
   },
-]);
+];
+const routes =
+  import.meta.env.MODE === "development"
+    ? createBrowserRouter(routesList)
+    : createHashRouter(routesList);
+
 enableMocking().then(() => {
   // Créer une application React et la rattache à l'élément avec l'id "root".
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
