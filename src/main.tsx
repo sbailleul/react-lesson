@@ -20,7 +20,11 @@ async function enableMocking() {
 
   // `worker.start()` returns a Promise that resolves
   // once the Service Worker is up and ready to intercept requests.
-  return worker.start();
+  return worker.start({
+    findWorker: (scriptUrl) => {
+      return scriptUrl.includes("mockServiceWorker");
+    },
+  });
 }
 const routesList = [
   {
@@ -35,10 +39,9 @@ const routesList = [
     ],
   },
 ];
-const routes =
-  import.meta.env.MODE === "development"
-    ? createBrowserRouter(routesList)
-    : createHashRouter(routesList);
+const routes = createBrowserRouter(routesList, {
+  basename: import.meta.env.BASE_URL,
+});
 
 enableMocking().then(() => {
   // Créer une application React et la rattache à l'élément avec l'id "root".
