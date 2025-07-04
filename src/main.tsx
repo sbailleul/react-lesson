@@ -5,6 +5,7 @@ import "@/index.scss";
 import { ThemeProvider } from "@/features/students-managment/context/ThemeContext";
 import {
   createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import { StudentDetailPage } from "@/features/students-managment/components/student-detail/Page";
@@ -22,7 +23,7 @@ async function enableMocking() {
   return worker.start();
 }
 
-const routes = createBrowserRouter([
+const routes = createHashRouter([
   {
     path: "/",
     element: <App />,
