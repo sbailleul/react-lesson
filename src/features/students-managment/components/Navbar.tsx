@@ -4,9 +4,9 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand navbar-light bg-light mb-3">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="#">
           My App
-        </a>
+        </Link>
         <div className="navbar-nav">
           <Link className="nav-link" to="/">
             Home
