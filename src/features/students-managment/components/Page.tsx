@@ -3,8 +3,12 @@ import { Form } from "@/features/students-managment/components/Form";
 import type { NewStudent } from "@/features/students-managment/components/StudentField";
 import { Students } from "@/features/students-managment/components/Students";
 import type { Student } from "@/features/students-managment/shared/types";
+import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 import { useCallback, useEffect, useMemo, useState } from "react";
-
+function ThrowError() {
+  throw new Error("This is an error thrown by the component");
+  return <></>
+}
 type RequestStatus = "idle" | "loading" | "success" | "error";
 
 export function Page() {
@@ -76,17 +80,24 @@ export function Page() {
       });
   };
   return (
-      <div className="flex flex-column">
-        <h1>{students.length} étudiants</h1>
-        {status === "loading" && <h2>Loading ...</h2>}
-        {status === "error" && <h2 className="alert alert-danger">Error !</h2>}
-        <Form
-          title="Edition étudiants"
-          fired={false}
-          onStudentReady={addStudent}
-        />
-        <Students students={uppercasedStudents} onDelete={deleteStudent} />
-         <ColorPicker />
-      </div>
+    <ErrorBoundary>
+      <>
+        <ThrowError />
+        <div className="flex flex-column">
+          <h1>{students.length} étudiants</h1>
+          {status === "loading" && <h2>Loading ...</h2>}
+          {status === "error" && (
+            <h2 className="alert alert-danger">Error !</h2>
+          )}
+          <Form
+            title="Edition étudiants"
+            fired={false}
+            onStudentReady={addStudent}
+          />
+          <Students students={uppercasedStudents} onDelete={deleteStudent} />
+          <ColorPicker />
+        </div>
+      </>
+    </ErrorBoundary>
   );
 }
