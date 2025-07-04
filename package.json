@@ -48,5 +48,6 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "homepage": "https://sbailleul.github.io/react-lesson"
 }
