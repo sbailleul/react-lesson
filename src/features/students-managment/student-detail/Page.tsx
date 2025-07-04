@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export function Page() {
   const [student, setStudent] = useState<StudentDetail>();
-  const [status, setStatus] = useState("idle");
+  const [, setStatus] = useState("idle");
   const { studentId } = useParams();
   useEffect(() => {
     setStatus("loading");

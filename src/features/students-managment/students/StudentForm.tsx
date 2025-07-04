@@ -26,7 +26,7 @@ export function StudentForm({ onStudentCreated }: Props) {
       <button
         type="button"
         disabled={!firstname || !lastname}
-        onClick={(e) =>
+        onClick={() =>
           onStudentCreated({
             firstname: firstname as string,
             lastname: lastname as string,

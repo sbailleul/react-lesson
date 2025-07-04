@@ -12,14 +12,14 @@ const students = [
 	},
 ] satisfies Student[];
 export function mockStudents() {
-	return http.get("*/api/v1/students", async (ctx) => {
+	return http.get("*/api/v1/students", async () => {
 		// return HttpResponse.error();
 		return HttpResponse.json(students);
 	});
 }
 
 export function mockDeleteStudent() {
-	return http.delete("*/api/v1/students/:id", async ({ request, params }) => {
+	return http.delete("*/api/v1/students/:id", async ({ params }) => {
 		const studentId = params.id;
 		const studentToRemoveIdx = students.findIndex((s) => s.id === studentId);
 		students.splice(studentToRemoveIdx, 1);
@@ -28,7 +28,7 @@ export function mockDeleteStudent() {
 }
 
 export function mockCreateStudent() {
-	return http.post("*/api/v1/students", async ({ request, params }) => {
+	return http.post("*/api/v1/students", async ({ request }) => {
 		const student = (await request.json()) as Omit<Student, "id">;
 		console.log(student);
 		students.push({ ...student, id: faker.string.uuid() });
@@ -37,7 +37,7 @@ export function mockCreateStudent() {
 }
 
 export function mockGetStudent() {
-	return http.get("*/api/v1/students/:id", async ({ request, params }) => {
+	return http.get("*/api/v1/students/:id", async ({  params }) => {
 		await delay(1500);
 		const studentId = params.id;
 		const student = students.find((s) => s.id === studentId);
