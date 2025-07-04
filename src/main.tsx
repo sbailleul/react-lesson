@@ -1,15 +1,14 @@
+import { App } from "@/App";
+import { Page } from "@/features/students-managment/components/Page";
+import { StudentDetailPage } from "@/features/students-managment/components/student-detail/Page";
+import { ThemeProvider } from "@/features/students-managment/context/ThemeContext";
+import "@/index.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "@/App";
-import "@/index.scss";
-import { ThemeProvider } from "@/features/students-managment/context/ThemeContext";
 import {
-  createBrowserRouter,
   createHashRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
-import { StudentDetailPage } from "@/features/students-managment/components/student-detail/Page";
-import { Page } from "@/features/students-managment/components/Page";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
