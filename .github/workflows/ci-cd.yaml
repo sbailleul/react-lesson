@@ -1,6 +1,6 @@
 name: CI/CD Pipeline
-permissions: 
-  pages: write
+permissions:
+  contents: write
 on:
   push:
     branches:
