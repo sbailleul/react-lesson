@@ -5,10 +5,7 @@ import { ThemeProvider } from "@/features/students-managment/context/ThemeContex
 import "@/index.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -16,14 +13,21 @@ async function enableMocking() {
   }
 
   const { worker } = await import("./mocks/browser");
-
+  console.log(import.meta.env.BASE_URL);
   // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
-  return worker.start({
-    serviceWorker: {
-      url: import.meta.env.BASE_URL + "/mockServiceWorker.js",
-    },
-  });
+  // once the Service Worker is up and ready to intercept requests.*
+  let config = undefined;
+  if (import.meta.env.MODE === "production") {
+    config = {
+      serviceWorker: {
+        url:
+          window.location.origin +
+          import.meta.env.BASE_URL +
+          "/mockServiceWorker.js",
+      },
+    };
+  }
+  return worker.start(config);
 }
 const routesList = [
   {

@@ -15,7 +15,7 @@ export function Page() {
   const [, setDeleteStatus] = useState<RequestStatus>("idle");
   const fetchStudents = useCallback(() => {
     setStatus("loading");
-    fetch("http://fake-api/api/v1/students")
+    fetch("api/v1/students")
       .then((response) => {
         response
           .json()
@@ -41,7 +41,7 @@ export function Page() {
   );
   const addStudent = (student: NewStudent) => {
     setCreateStatus("loading");
-    fetch("http://fake-api/api/v1/students", {
+    fetch("/api/v1/students", {
       method: "POST",
       body: JSON.stringify(student),
     })
@@ -60,7 +60,7 @@ export function Page() {
   };
   const deleteStudent = (studentId: string) => {
     setDeleteStatus("loading");
-    fetch(`http://fake-api/api/v1/students/${studentId}`, {
+    fetch(`/api/v1/students/${studentId}`, {
       method: "DELETE",
     })
       .then((response) => {
