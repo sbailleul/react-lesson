@@ -5,10 +5,7 @@ import { Students } from "@/features/students-managment/components/Students";
 import type { Student } from "@/features/students-managment/shared/types";
 import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 import { useCallback, useEffect, useMemo, useState } from "react";
-function ThrowError() {
-  throw new Error("This is an error thrown by the component");
-  return <></>
-}
+
 type RequestStatus = "idle" | "loading" | "success" | "error";
 
 export function Page() {
@@ -82,7 +79,6 @@ export function Page() {
   return (
     <ErrorBoundary>
       <>
-        <ThrowError />
         <div className="flex flex-column">
           <h1>{students.length} étudiants</h1>
           {status === "loading" && <h2>Loading ...</h2>}
