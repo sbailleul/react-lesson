@@ -4,6 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import react from "@vitejs/plugin-react-swc";
 import { reactClickToComponent } from "vite-plugin-react-click-to-component";
 export default defineConfig({
+  base: "/react-lesson",
   plugins: [react(), reactClickToComponent(), tsconfigPaths()],
   test: {
     environment: "happy-dom",
