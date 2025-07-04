@@ -27,3 +27,16 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/al-2'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deployment
+          commit_message: 'Deploy to GitHub Pages'
+          force_orphan: true
