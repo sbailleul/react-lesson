@@ -6,9 +6,9 @@ import "@/index.scss";
 import { ThemeProvider } from "@/shared/theme/ThemeContext";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <App />,
     path: "/",
