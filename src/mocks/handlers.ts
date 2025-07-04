@@ -11,6 +11,9 @@ const students = [
 	},
 ];
 export const handlers = [
+	http.get("*/api/v1/sessions/slots", async () => {
+		return HttpResponse.json({slots: ["Lundi 8h30", "Lundi 10h30", "Mardi 8h30", "Mardi 10h30"]});
+	}),
 	http.get("*/api/v1/students", async () => {
 		// await delay(5000);
 		// return HttpResponse.error();
