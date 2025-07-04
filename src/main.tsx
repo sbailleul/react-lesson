@@ -7,8 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
-  createHashRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
 
 async function enableMocking() {
